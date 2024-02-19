@@ -1,94 +1,57 @@
+import { useEffect, useState } from 'react'
 import ProductsList from '../../components/ProductsList'
-import Game from '../../models/Game'
-
-import resident from '../../assets/images/resident.png'
-import diablo from '../../assets/images/diablo.png'
 import Banner from '../../components/Banner'
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  },
-  {
-    id: 2,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  },
-  {
-    id: 3,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  },
-  {
-    id: 4,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: resident
-  }
-]
+export interface GalleryItem {
+  type: 'image' | 'video'
+  url: string
+}
 
-const emBreve: Game[] = [
-  {
-    id: 5,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: diablo
-  },
-  {
-    id: 6,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: diablo
-  },
-  {
-    id: 7,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: diablo
-  },
-  {
-    id: 8,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: diablo
+export type Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: string
+  prices: {
+    discount?: number
+    old?: number
+    current?: number
   }
-]
+  details: {
+    category: string
+    system: string
+    developer: string
+    publisher: string
+    languages: string[]
+  }
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
+}
 
-const Home = () => (
-  <>
-    <Banner />
-    <ProductsList title="Promoções" backgroud="gray" games={promocoes} />
-    <ProductsList title="Em breve" backgroud="black" games={emBreve} />
-  </>
-)
+const Home = () => {
+  const [promocoes, setPromocoes] = useState<Game[]>([])
+  const [emBreve, setEmBreve] = useState<Game[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/promocoes')
+      .then((res) => res.json())
+      .then((res) => setPromocoes(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/em-breve')
+      .then((res) => res.json())
+      .then((res) => setEmBreve(res))
+  }, [])
+
+  return (
+    <>
+      <Banner />
+      <ProductsList title="Promoções" backgroud="gray" games={promocoes} />
+      <ProductsList title="Em breve" backgroud="black" games={emBreve} />
+    </>
+  )
+}
 
 export default Home

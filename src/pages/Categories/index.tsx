@@ -1,94 +1,48 @@
+import { useEffect, useState } from 'react'
+import { Game } from '../Home'
 import ProductsList from '../../components/ProductsList'
-import Game from '../../models/Game'
 
-import starwars from '../../assets/images/star_wars.png'
-import zelda from '../../assets/images/zelda.png'
+const Categories = () => {
+  const [gamesAcao, setGamesAcao] = useState<Game[]>([])
+  const [gamesEsportes, setGamesEsportes] = useState<Game[]>([])
+  const [gamesSimulacao, setGamesSimulacao] = useState<Game[]>([])
+  const [gamesLuta, setGamesLuta] = useState<Game[]>([])
+  const [gamesRPG, setGamesRPG] = useState<Game[]>([])
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: zelda
-  },
-  {
-    id: 2,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: zelda
-  },
-  {
-    id: 3,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: zelda
-  },
-  {
-    id: 4,
-    system: 'windows',
-    category: 'Ação',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: zelda
-  }
-]
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/acao')
+      .then((res) => res.json())
+      .then((res) => setGamesAcao(res))
 
-const emBreve: Game[] = [
-  {
-    id: 5,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: starwars
-  },
-  {
-    id: 6,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: starwars
-  },
-  {
-    id: 7,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: starwars
-  },
-  {
-    id: 8,
-    category: 'Ação',
-    system: 'windows',
-    description: 'teste',
-    title: 'Resident Evil 4',
-    infos: ['10%', 'R$ 250,00'],
-    image: starwars
-  }
-]
+    fetch('https://fake-api-tau.vercel.app/api/eplay/esportes')
+      .then((res) => res.json())
+      .then((res) => setGamesEsportes(res))
 
-const Categories = () => (
-  <>
-    <ProductsList title="RPG" backgroud="gray" games={promocoes} />
-    <ProductsList title="Ação" backgroud="black" games={emBreve} />
-    <ProductsList title="Aventura" backgroud="gray" games={promocoes} />
-    <ProductsList title="FPS" backgroud="black" games={emBreve} />
-  </>
-)
+    fetch('https://fake-api-tau.vercel.app/api/eplay/simulacao')
+      .then((res) => res.json())
+      .then((res) => setGamesSimulacao(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
+      .then((res) => res.json())
+      .then((res) => setGamesLuta(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/rpg')
+      .then((res) => res.json())
+      .then((res) => setGamesRPG(res))
+  }, [])
+  return (
+    <>
+      <ProductsList title="Ação" backgroud="black" games={gamesAcao} />
+      <ProductsList title="Esportes" backgroud="gray" games={gamesEsportes} />
+      <ProductsList title="Luta" backgroud="black" games={gamesLuta} />
+      <ProductsList title="RPG" backgroud="gray" games={gamesRPG} />
+      <ProductsList
+        title="Simulação"
+        backgroud="black"
+        games={gamesSimulacao}
+      />
+    </>
+  )
+}
 
 export default Categories
