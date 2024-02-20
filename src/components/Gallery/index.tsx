@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 import { GalleryItem } from '../../pages/Home'
 
-import Section from '../section'
+import Section from '../Section'
 import spiderman from '../../assets/images/banner-homem-aranha.png'
 
 import play from '../../assets/images/play.png'

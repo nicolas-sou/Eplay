@@ -20,11 +20,11 @@ const Product = ({
   image,
   id
 }: Props) => {
-  const getDescricao = (desccricao: string) => {
-    if (desccricao.length > 95) {
-      return desccricao.slice(0, 92) + '...'
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 95) {
+      return descricao.slice(0, 92) + '...'
     }
-    return desccricao
+    return descricao
   }
   return (
     <Card to={`/product/${id}`}>
