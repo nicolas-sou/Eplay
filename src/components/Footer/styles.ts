@@ -6,9 +6,16 @@ export const Container = styled.footer`
   background-color: ${cores.cinza};
   padding: 32px 0;
   font-size: 14px;
+  margin-top: 40px;
 `
 
 export const SectionTitle = styled.h4`
+  color: ${cores.branca};
+  font-size: 16px;
+  font-weight: bold;
+`
+
+export const Title = styled.h4`
   color: ${cores.branca};
   font-size: 16px;
   font-weight: bold;

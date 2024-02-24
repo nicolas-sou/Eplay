@@ -1,4 +1,4 @@
-import { Container, FooterSection, Link, Links, SectionTitle } from './styles'
+import { Container, FooterSection, Link, Links, Title } from './styles'
 
 const currentYear = new Date().getFullYear()
 
@@ -6,27 +6,27 @@ const Footer = () => (
   <Container>
     <div className="container">
       <FooterSection>
-        <SectionTitle>Categoris</SectionTitle>
+        <Title>Categorias</Title>
         <Links>
           <li>
-            <Link to="/categories#rpg">RPG</Link>
+            <Link to="/categorias#rpg">RPG</Link>
           </li>
           <li>
-            <Link to="/categories#action">Ação</Link>
+            <Link to="/categorias#action">Ação</Link>
           </li>
           <li>
-            <Link to="/categories#sports">Esportes</Link>
+            <Link to="/categorias#sports">Esportes</Link>
           </li>
           <li>
-            <Link to="/categories#simulation">Simulação</Link>
+            <Link to="/categorias#simulation">Simulação</Link>
           </li>
           <li>
-            <Link to="/categories#fight">Luta</Link>
+            <Link to="/categorias#fight">Luta</Link>
           </li>
         </Links>
       </FooterSection>
       <FooterSection>
-        <SectionTitle>Acesso rápido</SectionTitle>
+        <Title>Acesso rápido</Title>
         <Links>
           <li>
             <Link to="/#on-sale">Promoções</Link>

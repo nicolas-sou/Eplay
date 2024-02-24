@@ -1,12 +1,49 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Game } from '../pages/Home'
+
+type Product = {
+  id: number
+  price: number
+}
+
+type PurchasePayload = {
+  products: Product[]
+  billing: {
+    name: string
+    email: string
+    document: string
+  }
+  delivery: {
+    email: string
+  }
+  payment: {
+    card: {
+      active: boolean
+      owner?: {
+        name: string
+        document: string
+      }
+      name?: string
+      number?: string
+      expires?: {
+        month: number
+        year: number
+      }
+      code?: number
+    }
+    installments: number
+  }
+}
+
+type PurchaseResponse = {
+  orderId: string
+}
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://fake-api-tau.vercel.app/api/eplay'
   }),
   endpoints: (builder) => ({
-    getFeaturedGame: builder.query<Game, void>({
+    getFeatureGame: builder.query<Game, void>({
       query: () => 'destaque'
     }),
     getOnSale: builder.query<Game[], void>({
@@ -18,34 +55,42 @@ const api = createApi({
     getActionGames: builder.query<Game[], void>({
       query: () => 'acao'
     }),
-    getSportGames: builder.query<Game[], void>({
-      query: () => 'esportes'
+    getRPGGames: builder.query<Game[], void>({
+      query: () => 'rpg'
     }),
     getSimulationGames: builder.query<Game[], void>({
       query: () => 'simulacao'
     }),
-    getfightGames: builder.query<Game[], void>({
+    getFightGames: builder.query<Game[], void>({
       query: () => 'luta'
     }),
-    getRpgGames: builder.query<Game[], void>({
-      query: () => 'luta'
+    getSportsGames: builder.query<Game[], void>({
+      query: () => 'esportes'
     }),
     getGame: builder.query<Game, string>({
-      query: (id) => `jogos/${id}`
+      query: (id) => `/jogos/${id}`
+    }),
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
+      query: (body) => ({
+        url: '/checkout',
+        method: 'POST',
+        body
+      })
     })
   })
 })
 
 export const {
-  useGetFeaturedGameQuery,
-  useGetSoonQuery,
+  useGetFeatureGameQuery,
   useGetOnSaleQuery,
+  useGetSoonQuery,
   useGetActionGamesQuery,
-  useGetRpgGamesQuery,
+  useGetRPGGamesQuery,
   useGetSimulationGamesQuery,
-  useGetSportGamesQuery,
-  useGetfightGamesQuery,
-  useGetGameQuery
+  useGetFightGamesQuery,
+  useGetSportsGamesQuery,
+  useGetGameQuery,
+  usePurchaseMutation
 } = api
 
 export default api
