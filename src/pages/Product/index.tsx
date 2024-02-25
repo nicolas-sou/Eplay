@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom'
 import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
-import Section from '../../components/section'
+
 import { useGetGameQuery } from '../../services/api'
 import Loader from '../../components/Loader'
+import Section from '../../components/section'
 
 type GameParams = {
   id: string
