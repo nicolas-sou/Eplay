@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 
-import Section from '../Section.js'
+import Section from '../section/index.js'
 
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
